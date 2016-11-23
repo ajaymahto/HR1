@@ -1,15 +1,21 @@
 #! /usr/bin/env python
 
+from collections import Counter as counter
+
 M, N = map(int, raw_input().strip().split())
-set1 = raw_input().strip()
-set2 = raw_input().strip()
-my_set = raw_input().strip()
-my_unique_set = list(set(my_set.split()))
+my_set = raw_input().strip().split()
+freq = counter(my_set)
+my_unique_set = list(set(my_set))
+set1 = raw_input().strip().split()
+set2 = raw_input().strip().split()
 
 happyness = 0
-for number in my_unique_set:
-	if number in set1:
-		happyness += my_set.count(number) 
-	elif number in set2:
-		happyness += (-1 * my_set.count(number))
+for number in set1:
+	if number in my_unique_set:
+		happyness += freq[number]
+
+for number in set2:
+	if number in my_unique_set:
+		happyness -= freq[number]
+
 print happyness
